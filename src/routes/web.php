@@ -15,9 +15,18 @@ use App\Http\Controllers\CarroController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::resource('products', ProductController::class);
@@ -42,3 +51,5 @@ Route::get('/revisao', [RevisaoController::class, 'index']);
 Route::delete('/revisao/destroy', [RevisaoController::class, 'destroy'])->name('revisao.destroy');
 Route::get('/revisao/edit/{id}', [RevisaoController::class, 'edit'])->name('revisao.edit');
 Route::post('/revisao/update/{revisao}', [RevisaoController::class, 'update'])->name('revisao.update');
+
+Route::post('/revisao/logout/', [RevisaoController::class, 'logout'])->name('logout');

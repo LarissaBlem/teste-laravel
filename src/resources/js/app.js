@@ -1,2 +1,7 @@
-require('./bootstrap');
-require('admin-lte');
+import './bootstrap';
+
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();
