@@ -17,7 +17,24 @@
         </div>
     @endif
     <div class="table-responsive">
-
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Filtros</h5>
+                <form action="{{ route('pessoa.index.filtro') }}" method="POST">
+                    @csrf
+                    <div class="">
+                        <div class="mb-3">
+                            <select class="form-select" aria-label="Default select example" name="genero">
+                                <option selected>Selecione</option>
+                                <option value="F">Feminino</option>
+                                <option value="M">Masculino</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Filtrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <table class="table table-bordered ">
             <tr>
                 <th>Id</th>
@@ -35,7 +52,7 @@
                     <td>{{ $pessoa->idade }}</td>
                     <td>
                         <form action="{{ route('pessoa.destroy', $pessoa->id) }}" method="POST">
-                            <a class="btn btn-info" href="{{ route('pessoa.show', $pessoa->id) }}">Detalhes</a>
+                            <a class="btn btn-info" href="{{ route('carro.index.pessoa', $pessoa->id) }}">Veículos</a>
                             <a class="btn btn-primary" href="{{ route('pessoa.edit', $pessoa->id) }}">Editar</a>
                             @csrf
                             @method('DELETE')

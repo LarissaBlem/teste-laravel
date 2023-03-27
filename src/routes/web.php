@@ -32,11 +32,15 @@ Route::middleware('auth')->group(function () {
 Route::resource('products', ProductController::class);
 Route::resource('pessoa', PessoaController::class);
 Route::post('pessoa/getPessoas', [PessoaController::class, 'getPessoas'])->name('pessoa.getPessoas');
+Route::post('/pessoa', [PessoaController::class, 'index'])->name('pessoa.index.filtro');
+Route::get('/pessoa', [PessoaController::class, 'index'])->name('pessoa.index');
+Route::get('/pessoa/create', [PessoaController::class, 'create'])->name('pessoa.create');
+Route::post('/pessoa/store', [PessoaController::class, 'store'])->name('pessoa.store');
 // Route::resource('carro', CarroController::class);
 
 //Rotas para gerenciamento de Carros.
-Route::get('/carro/create/{id}', [CarroController::class, 'create']);
-Route::get('/carro/{id}', [CarroController::class, 'index']);
+Route::get('/carro/create/{id}', [CarroController::class, 'create'])->name('carro.create');
+Route::get('/carro/{id}', [CarroController::class, 'index'])->name('carro.index.pessoa');
 Route::delete('/carro/{carro}', [CarroController::class, 'destroy'])->name('carro.destroy');
 Route::get('/carro/edit/{id}', [CarroController::class, 'edit'])->name('carro.edit');
 Route::post('/carro/update/{carro}', [CarroController::class, 'update'])->name('carro.update');
