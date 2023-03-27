@@ -13,7 +13,9 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{route('revisao.index')}}">Revisões</a>
           </li>
-          
+           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="">Relatórios</a>
+          </li>          
         </ul>
       </div>
     </div>

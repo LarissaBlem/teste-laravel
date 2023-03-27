@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Teste do mozão</h2>
+                <h2>Gerenciamento de revisões</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('pessoa.create') }}">Novo Cliente</a>
@@ -23,7 +23,7 @@
             <th>Nome</th>
             <th>Genero</th>
             <th>Idade</th>
-            <th width="280px">Action</th>
+            <th width="280px">Ações</th>
         </tr>
 
         @foreach ($pessoas as $pessoa)
