@@ -1,4 +1,4 @@
-@extends('pessoa.layout')
+@extends('layouts.master')
 <!-- CSS -->
    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
  
@@ -56,11 +56,9 @@
                         </div>
                     </div>
                     <br/>
-                    <div class="col-xs-12 col-sm-12 col-md-12 text-center" class="btn btn-primary">
-                            <button  class="btn btn-primary" type="submit" class="btn btn-primary">Salvar</button>
-                    </div>
-                    <div class="pull-right">
-                        <a class="btn btn-primary" href="{{ route('pessoa.index') }}"> voltar</a>
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center" class="card-body">
+                            <button  class="btn btn-primary" type="submit">Salvar</button>
+                            <a class="btn btn-primary" href="{{ route('pessoa.index') }}"> voltar</a>
                     </div>
                 </div>
         </form>

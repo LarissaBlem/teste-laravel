@@ -1,4 +1,4 @@
-@extends('pessoa.layout')
+@extends('layouts.master')
 @section('content')
 
 <div class= "card">
@@ -7,9 +7,6 @@
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
                     <h2>Cadastro de Carro</h2>
-                </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('carro.index') }}"> voltar</a>
                 </div>
             </div>
         </div>
@@ -60,11 +57,11 @@
                         <input type="text" class="form-control" name="cor" placeholder="Cor">
                     </div>
                 </div>
-
                
-                
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <br/>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center" class="card-body">
                         <button type="submit" class="btn btn-primary">Salvar</button>
+                        <a class="btn btn-primary" href="{{ route('carro.index') }}"> voltar</a>
                 </div>
             </div>
         </form>

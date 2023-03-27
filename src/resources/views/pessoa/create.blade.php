@@ -38,11 +38,9 @@
                     </div>
                 </div>
                 <br/>
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center" class="btn btn-primary">
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center" class="card-body">
                         <button  class="btn btn-primary" type="submit" class="btn btn-primary">Salvar</button>
-                </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('pessoa.index') }}"> voltar</a>
+                        <a class="btn btn-primary" href="{{ route('pessoa.index') }}"> voltar</a>
                 </div>
             </div>
         </form>

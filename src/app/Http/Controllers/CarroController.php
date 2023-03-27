@@ -48,7 +48,7 @@ class CarroController extends Controller
     {
         $carro->update($request->all());
         $pessoa_id = $request->get('pessoa_id');
-        return redirect()->route('carro.index.pessoa',['id' => $pessoa_id]);
+        return redirect()->route('carro.index.pessoa',['pessoa_id' => $pessoa_id]);
     }
 
     public function autocomplete(Request $request)

@@ -12,6 +12,9 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('pessoa.index') }}">Pessoas</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ route('carro.index') }}">Carros</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('revisao.index') }}">Revisões</a>
                     </li>
                     <div class="dropdown">
