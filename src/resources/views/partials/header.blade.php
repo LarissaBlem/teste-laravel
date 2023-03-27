@@ -21,6 +21,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a href="{{route('relatorio.pessoa')}}" class="dropdown-item" href="#">Pessoas</a></li>
+                            <li><a href="{{route('relatorio.carro')}}" class="dropdown-item" href="#">Carros</a></li>
                         </ul>
                     </div>
                 </ul>
