@@ -34,6 +34,21 @@ class PessoaController extends Controller
         return redirect()->route('pessoa.index')->with('success', 'Cadastro efetuado com sucesso!');
     }
 
+    public function edit($id)
+    {
+        $pessoa = Pessoa::where('id', $id)->first();
+       
+        return view('pessoa.edit', compact("pessoa"));
+    }
+
+    public function update(Request $request, Pessoa $pessoa)
+    {
+        $dados = $request->all();
+        $dados['idade'] = Pessoa::calculaIdade($dados['dt_nasc']);
+        $pessoa->update($dados);
+        return redirect()->route('pessoa.index');
+    }
+
     public function getPessoas(Request $request)
     {
         $search = $request->search;
