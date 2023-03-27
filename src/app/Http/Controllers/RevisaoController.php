@@ -43,7 +43,7 @@ class RevisaoController extends Controller
     public function destroy(Revisao $revisao)
     {
         $revisao->delete();
-        return redirect()->route('pessoa.index')
+        return redirect()->route('revisao.index')
             ->with('success', 'Revisao removida com sucesso');
     }
 }
