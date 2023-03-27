@@ -16,35 +16,35 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+    <div class="table-responsive">
 
-    <table class="table table-bordered">
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Genero</th>
-            <th>Idade</th>
-            <th width="280px">Ações</th>
-        </tr>
+        <table class="table table-bordered ">
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Genero</th>
+                <th>Idade</th>
+                <th width="280px">Action</th>
+            </tr>
 
-        @foreach ($pessoas as $pessoa)
-        <tr>
-            <td>{{ $pessoa->id }}</td>
-            <td>{{ $pessoa->nome }}</td>
-            <td>{{ $pessoa->genero }}</td>
-            <td>{{ $pessoa->idade }}</td>
-            <td>
-                <form action="{{ route('pessoa.destroy',$pessoa->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('pessoa.show',$pessoa->id) }}">Detalhes</a>
-                    <a class="btn btn-primary" href="{{ route('pessoa.edit',$pessoa->id) }}">Editar</a>
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Apagar</button>
-                </form>
-            </td>
-        </tr>
-
-        @endforeach
-    </table>
-
+            @foreach ($pessoas as $pessoa)
+                <tr>
+                    <td>{{ $pessoa->id }}</td>
+                    <td>{{ $pessoa->nome }}</td>
+                    <td>{{ $pessoa->genero }}</td>
+                    <td>{{ $pessoa->idade }}</td>
+                    <td>
+                        <form action="{{ route('pessoa.destroy', $pessoa->id) }}" method="POST">
+                            <a class="btn btn-info" href="{{ route('pessoa.show', $pessoa->id) }}">Detalhes</a>
+                            <a class="btn btn-primary" href="{{ route('pessoa.edit', $pessoa->id) }}">Editar</a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Apagar</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
     {!! $pessoas->links() !!}
 @endsection
