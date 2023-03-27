@@ -12,7 +12,7 @@ class RelatorioController extends Controller
     public function pessoas(Request $request)
     {
         $pessoas = Pessoa::select('*')
-            ->groupBy(DB::raw('id,genero'))
+            ->groupBy(DB::raw('genero, id'))
             ->get();
 
         $homens = Pessoa::selectRaw('COUNT(id) as total, AVG(idade) as media')
@@ -32,12 +32,34 @@ class RelatorioController extends Controller
             ->groupBy(DB::raw('carros.id,pessoas.id'))
             ->orderBy(DB::raw('pessoas.nome'))
             ->get();
+
+        $homens = DB::select("SELECT COUNT(pessoas.id) as total FROM pessoas
+        INNER JOIN carros ON pessoas.id = carros.pessoa_id AND pessoas.genero='F'");
+
+        $homens = $homens[0]->total;
+
+        $mulheres = DB::select("SELECT COUNT(pessoas.id) as total FROM pessoas
+        INNER JOIN carros ON pessoas.id = carros.pessoa_id AND pessoas.genero='F'");
+
+        $mulheres = $mulheres[0]->total;
+
+        $marcas = $this->marcas();
+        return view('relatorio.carro', compact('carros', 'homens', 'mulheres', 'marcas'));
+    }
+
+
+    public function marcas()
+    {
+        $marcas = Carro::getMarcas(true);
+        $result = [];
+        $marcasdb = DB::select("SELECT marca, count(marca) as total from carros GROUP BY marca order by total desc");
         
-            // Assignment::select('id','batch_id','title','description','attachment','last_submission_date',DB::raw('(CASE WHEN type = 9 THEN "Quiz Type"  ELSE "Descriptive" END) AS assignment_type'),DB::raw('(CASE WHEN status = 1 THEN "Assigned"  ELSE "Not Assigned" END) AS status'))
-            //           ->with('assignmentBatch:id,batch_number')
-            //           ->where('assignments.instructor_id',auth('api')->user()->id)
-            //           ->orderBy('created_at','DESC');
+        foreach ($marcasdb as $mdb) {
+            $marcas[$mdb->marca] = $mdb->total;
+        }
         
-        return view('relatorio.carro', compact('carros'));
+        arsort($marcas);
+        return $marcas;
     }
 }
+
