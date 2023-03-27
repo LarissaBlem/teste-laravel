@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\CarroController;
+use App\Http\Controllers\RelatorioController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,11 +25,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+
 
 Route::resource('products', ProductController::class);
 //Route::resource('pessoa', PessoaController::class);
@@ -60,3 +58,5 @@ Route::get('/revisao/edit/{id}', [RevisaoController::class, 'edit'])->name('revi
 Route::post('/revisao/update/{revisao}', [RevisaoController::class, 'update'])->name('revisao.update');
 
 Route::post('/revisao/logout/', [RevisaoController::class, 'logout'])->name('logout');
+
+Route::get('/relatorio/pessoa', [RelatorioController::class, 'pessoas'])->name('relatorio.pessoa');
