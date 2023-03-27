@@ -60,3 +60,4 @@ Route::post('/revisao/update/{revisao}', [RevisaoController::class, 'update'])->
 Route::post('/revisao/logout/', [RevisaoController::class, 'logout'])->name('logout');
 
 Route::get('/relatorio/pessoa', [RelatorioController::class, 'pessoas'])->name('relatorio.pessoa');
+Route::get('/relatorio/carro', [RelatorioController::class, 'carros'])->name('relatorio.carro');

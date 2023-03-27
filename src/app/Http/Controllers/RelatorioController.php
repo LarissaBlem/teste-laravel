@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pessoa;
+use App\Models\Carro;
 use Illuminate\Support\Facades\DB;
 
 class RelatorioController extends Controller
@@ -22,5 +23,17 @@ class RelatorioController extends Controller
             ->where('genero', 'F')
             ->first();
         return view('relatorio.pessoa', compact('homens', 'mulheres', 'pessoas'));
+    }
+
+    public function carros()
+    {
+
+        $carros = Carro::select("*", 'pessoas.*')
+            ->join('pessoas', 'carros.pessoa_id', '=', 'pessoas.id')
+            ->groupBy(DB::raw('carros.id,pessoas.id'))
+            ->orderBy(DB::raw('pessoas.nome'))
+            ->get();
+
+        dd($carros);
     }
 }
