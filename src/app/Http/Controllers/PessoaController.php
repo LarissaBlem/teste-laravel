@@ -8,10 +8,16 @@ use Illuminate\Http\Request;
 class PessoaController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $pessoas = Pessoa::with('carros')->orderBy('nome', 'asc')->paginate(10);
-        // dd($pessoas);
+        $filtro = $request->only('genero');
+
+        if (!empty($filtro)) {
+            $pessoas = Pessoa::where('genero', $filtro['genero'])->with('carros')->orderBy('nome', 'asc')->paginate(10);
+        } else {
+            $pessoas = Pessoa::with('carros')->orderBy('nome', 'asc')->paginate(10);
+        }
+
         return view('pessoa.index', compact('pessoas'));
     }
 

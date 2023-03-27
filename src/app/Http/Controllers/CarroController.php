@@ -9,14 +9,15 @@ use App\Models\Carro;
 class CarroController extends Controller
 {
     //Se a busca for dentro de uma pessoa, retorna os carros para aquela pessoa, caso contrário lista todos os carros cadastrados.
-    public function index($pessoa_id = null)
+    public function index(Request $request, $pessoa_id = null)
     {
+        
         if ($pessoa_id == null) {
             $carros = Carro::orderBy('id', 'asc')->paginate(5);
         } else {
             $carros = Carro::where('pessoa_id', $pessoa_id)->orderBy('id', 'asc')->paginate(5);
         }
-        return view('carro.index', compact('carros'));
+        return view('carro.index', compact('carros', 'pessoa_id'));
     }
 
     //Cria um carro atrelado a uma pessoa.

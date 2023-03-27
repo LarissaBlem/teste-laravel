@@ -1,11 +1,13 @@
-@extends('pessoa.layout')
+@extends('layouts.master')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Teste do mozão</h2>
+                <h2>Lista de Veículos</h2>
             </div>
-            
+            <div class="pull-right">
+                <a class="btn btn-success" href="{{ route('carro.create', $pessoa_id) }}">Novo Veículo</a>
+            </div>
         </div>
     </div>
 
@@ -15,7 +17,8 @@
         </div>
     @endif
 
-    <table class="table table-bordered">
+    <div class="table-responsive">
+        <table class="table table-bordered">
         <tr>
             <th>Id</th>
             <th>Proprietário</th>
@@ -46,6 +49,8 @@
 
         @endforeach
     </table>
+    </div>
+    
 
     {!! $carros->links() !!}
 @endsection
