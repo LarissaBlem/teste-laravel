@@ -20,7 +20,7 @@ class CarroController extends Controller
         return view('carro.index', compact('carros', 'pessoa_id'));
     }
 
-    //Cria um carro atrelado a uma pessoa.
+    //Carrega a view de criação de carro atrelado a uma pessoa.
     public function create($pessoa_id)
     {
         $pessoa = Pessoa::find($pessoa_id);
@@ -28,7 +28,7 @@ class CarroController extends Controller
         return view('carro.create', compact('pessoa'));
     }
 
-    //Registra os dados de carro na tabela carro.
+    //Recebe e armazena os dados de carro cadastrados.
     public function store(Request $request)
     {
         Carro::create($request->all());
@@ -40,7 +40,7 @@ class CarroController extends Controller
     {
         $carro = Carro::where('id', $id)->with('pessoa')->first();
        
-        $marcas = $this->getMarcas();
+        $marcas = Carro::getMarcas();
         return view('carro.edit', compact("carro", "marcas"));
     }
 
@@ -48,29 +48,9 @@ class CarroController extends Controller
     {
         $carro->update($request->all());
         $pessoa_id = $request->get('pessoa_id');
-        return redirect()->route('carro.index.pessoa',['pessoa_id' => $pessoa_id]);
-    }
 
-    public function autocomplete(Request $request)
-    {
-        $data = Pessoa::select("name")
-                    ->where('name', 'LIKE', '%'. $request->get('query'). '%')
-                    ->get();
-
-        return response()->json($data);
-    }
-
-    public function getMarcas()
-    {
-        return [
-            'HONDA' => 'Honda',
-            'TOYOTA' => 'Toyota',
-            'CHEVROLET' => 'Chevrolet',
-            'FORD' => 'Ford',
-            'MERCEDES' => 'Mercedes',
-            'BMW' => 'BMW'
-        ];
-    }
+        return redirect()->route('carro.index.pessoa',['id' => $pessoa_id]);
+    }    
 
     public function destroy(Carro $carro)
     {

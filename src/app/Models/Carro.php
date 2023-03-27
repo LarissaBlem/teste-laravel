@@ -17,4 +17,27 @@ class Carro extends Model
     {
         return $this->belongsTo(Pessoa::class);
     }
+
+    static function getMarcas($clean = false)
+    {
+        if ($clean) {
+            return [
+                'HONDA' => 0,
+                'TOYOTA' => 0,
+                'CHEVROLET' => 0,
+                'FORD' => 0,
+                'MERCEDES' => 0,
+                'BMW' => 0
+            ];
+        } 
+
+        return [
+            'HONDA' => 'Honda',
+            'TOYOTA' => 'Toyota',
+            'CHEVROLET' => 'Chevrolet',
+            'FORD' => 'Ford',
+            'MERCEDES' => 'Mercedes',
+            'BMW' => 'BMW'
+        ];
+    }
 }
