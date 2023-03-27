@@ -11,9 +11,9 @@ class RelatorioController extends Controller
 {
     public function pessoas(Request $request)
     {
-        $pessoas = Pessoa::orderBy('nome', 'asc')->paginate(5);
-
-        // $homens = DB::select('SELECT COUNT(*) as total FROM pessoas where genero=?', ['M']);
+        $pessoas = Pessoa::select('*')
+            ->groupBy(DB::raw('id,genero'))
+            ->get();
 
         $homens = Pessoa::selectRaw('COUNT(id) as total, AVG(idade) as media')
             ->where('genero', 'M')
@@ -27,13 +27,17 @@ class RelatorioController extends Controller
 
     public function carros()
     {
-
         $carros = Carro::select("*", 'pessoas.*')
             ->join('pessoas', 'carros.pessoa_id', '=', 'pessoas.id')
             ->groupBy(DB::raw('carros.id,pessoas.id'))
             ->orderBy(DB::raw('pessoas.nome'))
             ->get();
-
-        dd($carros);
+        
+            // Assignment::select('id','batch_id','title','description','attachment','last_submission_date',DB::raw('(CASE WHEN type = 9 THEN "Quiz Type"  ELSE "Descriptive" END) AS assignment_type'),DB::raw('(CASE WHEN status = 1 THEN "Assigned"  ELSE "Not Assigned" END) AS status'))
+            //           ->with('assignmentBatch:id,batch_number')
+            //           ->where('assignments.instructor_id',auth('api')->user()->id)
+            //           ->orderBy('created_at','DESC');
+        
+        return view('relatorio.carro', compact('carros'));
     }
 }
