@@ -11,7 +11,7 @@ class CarroController extends Controller
     //Se a busca for dentro de uma pessoa, retorna os carros para aquela pessoa, caso contrário lista todos os carros cadastrados.
     public function index(Request $request, $pessoa_id = null)
     {
-        
+
         if ($pessoa_id == null) {
             $carros = Carro::orderBy('id', 'asc')->paginate(5);
         } else {
@@ -47,7 +47,8 @@ class CarroController extends Controller
     public function update(Request $request, Carro $carro)
     {
         $carro->update($request->all());
-        return redirect()->route('carro.index');
+        $pessoa_id = $request->get('pessoa_id');
+        return redirect()->route('carro.create',['pessoa_id' => $pessoa_id]);
     }
 
     public function autocomplete(Request $request)
