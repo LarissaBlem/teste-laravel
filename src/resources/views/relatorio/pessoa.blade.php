@@ -31,7 +31,7 @@
                         </tr>
                     @endforeach
                 </table>
-                {!! $pessoas->links() !!}
+
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="card">
