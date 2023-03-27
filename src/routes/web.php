@@ -33,7 +33,7 @@ Route::get('/carro/edit/{id}', [CarroController::class, 'edit'])->name('carro.ed
 Route::post('/carro/update/{carro}', [CarroController::class, 'update'])->name('carro.update');
 Route::get('/carro', [CarroController::class, 'index'])->name('carro.index');
 Route::post('carro/getCarros', [CarroController::class, 'getCarros'])->name('carro.getCarros');
-
+Route::post('/carro/store', [CarroController::class, 'store'])->name('carro.store');
 
 
 Route::get('/revisao/create', [RevisaoController::class, 'create'])->name('revisao.create');
@@ -41,3 +41,4 @@ Route::post('/revisao/store', [RevisaoController::class, 'store'])->name('revisa
 Route::get('/revisao', [RevisaoController::class, 'index']);
 Route::delete('/revisao/destroy', [RevisaoController::class, 'destroy'])->name('revisao.destroy');
 Route::get('/revisao/edit/{id}', [RevisaoController::class, 'edit'])->name('revisao.edit');
+Route::post('/revisao/update/{revisao}', [RevisaoController::class, 'update'])->name('revisao.update');
