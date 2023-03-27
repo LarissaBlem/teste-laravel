@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
-                    <h2>Editar Cliente</h2>
+                    <h2>Editar Pessoa</h2>
                 </div>
             </div>
         </div>
