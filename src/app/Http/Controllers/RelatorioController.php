@@ -43,6 +43,7 @@ class RelatorioController extends Controller
 
         $mulheres = $mulheres[0]->total;
 
+        //Molde para gráfico do relatório.
         $data['label'][] = 'Homens';
         $data['data'][] = $homens;
 
