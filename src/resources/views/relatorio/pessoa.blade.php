@@ -59,7 +59,7 @@
                             <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">Média idade Homens</h5>
+                                        <h5 class="card-title">Média de idade - Homens</h5>
                                         <p class="card-text">{{number_format($homens->media)}}
                                         </p>
                                     </div>
@@ -68,7 +68,7 @@
                             <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">Média idade Mulheres</h5>
+                                        <h5 class="card-title">Média de idade - Mulheres</h5>
                                         <p class="card-text">{{number_format($mulheres->media)}}
                                         </p>
                                     </div>
