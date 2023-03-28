@@ -17,10 +17,11 @@ return new class extends Migration
             $table->id();
 
             $table->integer('pessoa_id')->unsigned();
+            $table->integer('marca_id')->unsigned();
             $table->string('placa');
             $table->string('modelo');
-            $table->string('marca');
             $table->string('cor');
+            $table->foreign('marca_id')->references('id')->on('marcas');
             $table->foreign('pessoa_id')->references('id')->on('pessoas');
             $table->timestamps();
         });

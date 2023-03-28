@@ -39,14 +39,10 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Marca:</strong>
-                        <select name="marca" class="form-control">
-                            <option value="">Selecione</option>
-                            <option value="HONDA">Honda</option>
-                            <option value="TOYOTA">Toyota</option>
-                            <option value="CHEVROLET">Chevrolet</option>
-                            <option value="FORD">Ford</option>
-                            <option value="MERCEDES">Mercedes</option>
-                            <option value="BMW">BMW</option>
+                        <select name="marca_id" class="form-control">
+                        @foreach ($marcas as $marca)
+                            <option value="{{$marca->id}}">{{$marca->nome}}</option>
+                        @endforeach
                         </select>
                     </div>
                 </div>

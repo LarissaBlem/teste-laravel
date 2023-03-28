@@ -57,9 +57,9 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Marca:</strong>
-                        <select name="marca" class="form-control">
-                        @foreach ($marcas as $id => $marca)
-                            <option value="{{$id}}" @if($carro->marca == $id) selected  @endif >{{$marca}}</option>
+                        <select name="marca_id" class="form-control">
+                        @foreach ($marcas as $marca)
+                            <option value="{{$marca->id}}" @if($carro->marca_id == $marca->id) selected  @endif >{{$marca->nome}}</option>
                         @endforeach
                         </select>
                     </div>
