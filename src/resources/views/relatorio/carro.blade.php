@@ -73,6 +73,28 @@
 
         <div class="card">
             <div class="card-body">
+            <h5 class="card-title">Totais por Marca e Gênero</h5>
+                <table class="table table-bordered ">
+                    <tr>
+                        <th>Marca</th>
+                        <th>Gênero</th>
+                        <th>Quantidade</th>
+                    </tr>
+
+                    @foreach ($marcas_genero as $mg)
+                        <tr>
+                            <td>{{ $mg->nome }}</td>
+                            <td>{{ $mg->genero }}</td>
+                            <td>{{ $mg->total }}</td>
+
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
                 <h5 class="card-title">Totais</h5>
                 <div class="chart-container">
                     <div class="pie-chart-container">
