@@ -60,10 +60,10 @@
                         <th>Quantidade</th>
                     </tr>
 
-                    @foreach ($marcas as $marca => $qtd)
+                    @foreach ($marcas as $marca)
                         <tr>
-                            <td>{{ $marca }}</td>
-                            <td>{{ $qtd }}</td>
+                            <td>{{ $marca->nome }}</td>
+                            <td>{{ $marca->total }}</td>
 
                         </tr>
                     @endforeach
