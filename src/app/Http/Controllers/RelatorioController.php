@@ -52,17 +52,29 @@ class RelatorioController extends Controller
         $data['chart-data'] = json_encode($data);
         
         $marcas = $this->marcas();
-        return view('relatorio.carro', compact('carros', 'homens', 'mulheres', 'marcas', 'data'));
+
+        $marcas_genero = $this->marcas_genero();
+        return view('relatorio.carro', compact('carros', 'homens', 'mulheres', 'marcas', 'data', 'marcas_genero'));
     }
 
 
     public function marcas()
     {
-        $result = [];
         $marcasdb = DB::select(DB::raw("SELECT COUNT(C.id) as total, marcas.nome  from marcas
         INNER JOIN carros as C ON marcas.id = C.marca_id
         GROUP BY marcas.id
         ORDER BY total DESC"));
+
+        return $marcasdb;
+    }
+
+    public function marcas_genero()
+    {
+        $marcasdb = DB::select(DB::raw("SELECT COUNT(C.id) as total, marcas.nome, P.genero  from marcas
+        INNER JOIN carros as C ON marcas.id = C.marca_id
+		INNER JOIN pessoas as P ON C.pessoa_id = P.id
+        GROUP BY   P.genero, marcas.id
+		ORDER BY total DESC"));
 
         return $marcasdb;
     }
