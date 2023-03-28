@@ -14,9 +14,9 @@ class CarroController extends Controller
     {
 
         if ($pessoa_id == null) {
-            $carros = Carro::with('marca')->orderBy('id', 'asc')->paginate(5);
+            $carros = Carro::with('marca')->orderBy('id', 'asc')->get();
         } else {
-            $carros = Carro::where('pessoa_id', $pessoa_id)->with('marca')->orderBy('id', 'asc')->paginate(5);
+            $carros = Carro::where('pessoa_id', $pessoa_id)->with('marca')->orderBy('id', 'asc')->get();
         }
         return view('carro.index', compact('carros', 'pessoa_id'));
     }

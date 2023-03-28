@@ -66,8 +66,6 @@
                     </tr>
                 @endforeach
             </table>
-
-            {!! $revisoes->links() !!}
         </div>
     </div>
 @endsection

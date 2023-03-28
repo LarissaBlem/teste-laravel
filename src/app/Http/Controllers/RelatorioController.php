@@ -110,10 +110,11 @@ class RelatorioController extends Controller
                             $a = new \Datetime($data_anterior);
                             $b = new \Datetime($data);
 
-                            $diff = $b->diff($a)->d;
+                            $diff = $b->diff($a)->days;
                             $array_diff[] = $diff;
                         }
                     }
+
                     $media = (number_format(array_sum($array_diff)/count($array_diff)));
                     
                     $report[$pessoa->id] = [

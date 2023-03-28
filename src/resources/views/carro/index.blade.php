@@ -51,8 +51,6 @@
                 @endforeach
             </table>
             </div>
-        
-            {!! $carros->links() !!}
         </div>
     <div/>
 @endsection

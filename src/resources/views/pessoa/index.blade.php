@@ -66,5 +66,4 @@
             </div>
         </div>
     </div>
-    {!! $pessoas->links() !!}
 @endsection

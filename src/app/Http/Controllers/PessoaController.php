@@ -13,9 +13,9 @@ class PessoaController extends Controller
         $filtro = $request->only('genero');
 
         if (!empty($filtro)) {
-            $pessoas = Pessoa::where('genero', $filtro['genero'])->with('carros')->orderBy('nome', 'asc')->paginate(10);
+            $pessoas = Pessoa::where('genero', $filtro['genero'])->with('carros')->orderBy('nome', 'asc')->get();
         } else {
-            $pessoas = Pessoa::with('carros')->orderBy('nome', 'asc')->paginate(10);
+            $pessoas = Pessoa::with('carros')->orderBy('nome', 'asc')->get();
         }
 
         return view('pessoa.index', compact('pessoas'));

@@ -16,9 +16,9 @@ class RevisaoController extends Controller
             $revisoes = Revisao::whereBetween('data_revisao', [$filtro['ini'], $filtro['fim']])
                 ->with('pessoa', 'carro')
                 ->orderBy('id', 'desc')
-                ->paginate(5);
+                ->get();
         } else {
-            $revisoes = Revisao::with('pessoa', 'carro')->orderBy('id', 'asc')->paginate(5);
+            $revisoes = Revisao::with('pessoa', 'carro')->orderBy('id', 'asc')->get();
         }
         
         return view('revisao.index', compact('revisoes'));
