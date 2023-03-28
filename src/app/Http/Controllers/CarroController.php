@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pessoa;
 use App\Models\Carro;
+use App\Models\Marca;
 
 class CarroController extends Controller
 {
@@ -13,9 +14,9 @@ class CarroController extends Controller
     {
 
         if ($pessoa_id == null) {
-            $carros = Carro::orderBy('id', 'asc')->paginate(5);
+            $carros = Carro::with('marca')->orderBy('id', 'asc')->paginate(5);
         } else {
-            $carros = Carro::where('pessoa_id', $pessoa_id)->orderBy('id', 'asc')->paginate(5);
+            $carros = Carro::where('pessoa_id', $pessoa_id)->with('marca')->orderBy('id', 'asc')->paginate(5);
         }
         return view('carro.index', compact('carros', 'pessoa_id'));
     }
@@ -24,23 +25,24 @@ class CarroController extends Controller
     public function create($pessoa_id)
     {
         $pessoa = Pessoa::find($pessoa_id);
-
-        return view('carro.create', compact('pessoa'));
+        $marcas = Marca::all();
+        return view('carro.create', compact('pessoa', 'marcas'));
     }
 
     //Recebe e armazena os dados de carro cadastrados.
     public function store(Request $request)
     {
         Carro::create($request->all());
+        $pessoa_id = $request->get('pessoa_id');
 
-        return redirect()->route('pessoa.index')->with('success', 'Carro cadastrado com sucesso.');
+        return redirect()->route('carro.index.pessoa',['id' => $pessoa_id])->with('success', 'Carro cadastrado com sucesso.');
     }
 
     public function edit($id)
     {
         $carro = Carro::where('id', $id)->with('pessoa')->first();
        
-        $marcas = Carro::getMarcas();
+        $marcas = Marca::all();
         return view('carro.edit', compact("carro", "marcas"));
     }
 

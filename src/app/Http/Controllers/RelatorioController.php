@@ -34,7 +34,7 @@ class RelatorioController extends Controller
             ->get();
 
         $homens = DB::select("SELECT COUNT(pessoas.id) as total FROM pessoas
-        INNER JOIN carros ON pessoas.id = carros.pessoa_id AND pessoas.genero='F'");
+        INNER JOIN carros ON pessoas.id = carros.pessoa_id AND pessoas.genero='M'");
 
         $homens = $homens[0]->total;
 
@@ -43,8 +43,16 @@ class RelatorioController extends Controller
 
         $mulheres = $mulheres[0]->total;
 
+        $data['label'][] = 'Homens';
+        $data['data'][] = $homens;
+
+        $data['label'][] = 'Mulheres';
+        $data['data'][] = $mulheres;
+
+        $data['chart-data'] = json_encode($data);
+        
         $marcas = $this->marcas();
-        return view('relatorio.carro', compact('carros', 'homens', 'mulheres', 'marcas'));
+        return view('relatorio.carro', compact('carros', 'homens', 'mulheres', 'marcas', 'data'));
     }
 
 

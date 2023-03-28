@@ -36,7 +36,7 @@
                     <td>{{ $carro->id }}</td>
                     <td>{{ $carro->pessoa->nome }}</td>
                     <td>{{ $carro->placa }}</td>
-                    <td>{{ $carro->marca }}</td>
+                    <td>{{ $carro->marca->nome }}</td>
                     <td>{{ $carro->modelo }}</td>
                     <td>{{ $carro->cor }} </td>
                     <td>
