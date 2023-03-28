@@ -46,7 +46,10 @@ class RevisaoController extends Controller
 
     public function update(Request $request, Revisao $revisao)
     {
+        $revisao->update($request->all());
+       
 
+        return redirect()->route('revisao.index')->with('success', 'Edição realizada com sucesso');
     }
 
     public function destroy(Revisao $revisao)
