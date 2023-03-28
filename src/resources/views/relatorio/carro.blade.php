@@ -1,4 +1,5 @@
 @extends('layouts.master')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 @section('content')
      <div class="table-responsive">
         <div class="card table-bordered">

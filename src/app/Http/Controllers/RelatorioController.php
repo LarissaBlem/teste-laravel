@@ -57,7 +57,76 @@ class RelatorioController extends Controller
         return view('relatorio.carro', compact('carros', 'homens', 'mulheres', 'marcas', 'data', 'marcas_genero'));
     }
 
+    public function revisoes()
+    {
+        $marcas = DB::select(
+            DB::raw(
+                "SELECT COUNT(R.id) as total, marcas.nome  from marcas
+                INNER JOIN carros as C ON marcas.id = C.marca_id
+                INNER JOIN revisoes as R ON C.id = R.carro_id
+                GROUP BY marcas.id
+                ORDER BY total DESC"
+            )
+        );
 
+        $pessoas  = DB::select(
+            DB::raw(
+                "SELECT COUNT(C.id) as total, P.nome  from pessoas as P
+                INNER JOIN carros as C ON P.id = C.pessoa_id
+                INNER JOIN revisoes as R ON C.id = R.carro_id
+                GROUP BY P.id
+                ORDER BY total DESC"
+            )
+        );
+
+        $revisoes_pessoas = $this->revisoes_pessoas();
+        return view('relatorio.revisao', compact('marcas', 'pessoas', 'revisoes_pessoas'));
+    }
+
+
+    public function revisoes_pessoas()
+    {
+        $pessoas = Pessoa::with('revisoes')->get();
+
+        $data_anterior = false;
+        $report = [];
+
+        foreach ($pessoas as $pessoa) {
+            $data_anterior = false;
+            if (!empty($pessoa->revisoes)) {
+                if ($pessoa->revisoes->count() <= 1) {
+                    $report[$pessoa->id] = [
+                        'nome' => $pessoa->nome,
+                        'media' => "0",
+                        'proxima' => '-'
+                    ];    
+                } else {
+                    $datas = $pessoa->revisoes->pluck('data_revisao')->toArray();
+                    $array_diff = [];
+                    foreach ($datas as $data) {
+                        if (!$data_anterior) {
+                            $data_anterior = $data;
+                        } else {
+                            $a = new \Datetime($data_anterior);
+                            $b = new \Datetime($data);
+
+                            $diff = $b->diff($a)->d;
+                            $array_diff[] = $diff;
+                        }
+                    }
+                    $media = (number_format(array_sum($array_diff)/count($array_diff)));
+                    
+                    $report[$pessoa->id] = [
+                        'nome' => $pessoa->nome,
+                        'media' => $media,
+                        'proxima' => $b->modify("+{$media} days")->format('Y-m-d')
+                    ];  
+                }
+            }
+            
+        }
+        return $report;
+    }
     public function marcas()
     {
         $marcasdb = DB::select(DB::raw("SELECT COUNT(C.id) as total, marcas.nome  from marcas
@@ -78,5 +147,7 @@ class RelatorioController extends Controller
 
         return $marcasdb;
     }
+
+
 }
 

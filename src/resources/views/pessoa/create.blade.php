@@ -11,20 +11,20 @@
             </div>
         </div>
 
-        <form class="mb-3" action="{{ route('pessoa.store') }}" method="POST">
+        <form class="mb-3 needs-validation" action="{{ route('pessoa.store') }}" method="POST">
             @csrf
             <div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-12 has-validation">
                     <div class="">
                         <strong>Nome:</strong>
-                        <input type="text" name="nome" class="form-control" placeholder="Nome Completo" aria-label="default input example">
+                        <input type="text" name="nome" class="form-control" placeholder="Nome Completo" aria-label="default input example" required>
                     </div>
                 </div>
 
                 <div  class="mb-3">
                     <div class="">
                         <strong>Gênero:</strong>
-                        <select name="genero" class="form-select" aria-label="Default select example">
+                        <select name="genero" class="form-select" aria-label="Default select example" required>
                             <option value="F">Feminino</option>
                             <option value="M">Masculino</option>
                         </select>
@@ -34,7 +34,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Data de Nascimento:</strong>
-                        <input type="date" name="dt_nasc" />
+                        <input type="date" name="dt_nasc" required />
                     </div>
                 </div>
                 <br/>
@@ -46,4 +46,25 @@
         </form>
     </div>
 </div>
+<script type="text/javascript">
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
 @endsection
