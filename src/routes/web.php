@@ -17,7 +17,7 @@ use App\Http\Controllers\RelatorioController;
 |
 */
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('relatorio.pessoa');
 });
 
 Route::get('/dashboard', function () {
