@@ -58,16 +58,13 @@ class RelatorioController extends Controller
 
     public function marcas()
     {
-        $marcas = Carro::getMarcas(true);
         $result = [];
-        $marcasdb = DB::select("SELECT marca, count(marca) as total from carros GROUP BY marca order by total desc");
-        
-        foreach ($marcasdb as $mdb) {
-            $marcas[$mdb->marca] = $mdb->total;
-        }
-        
-        arsort($marcas);
-        return $marcas;
+        $marcasdb = DB::select(DB::raw("SELECT COUNT(C.id) as total, marcas.nome  from marcas
+        INNER JOIN carros as C ON marcas.id = C.marca_id
+        GROUP BY marcas.id
+        ORDER BY total DESC"));
+
+        return $marcasdb;
     }
 }
 
