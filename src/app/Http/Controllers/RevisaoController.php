@@ -9,9 +9,18 @@ use App\Models\Carro;
 class RevisaoController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $revisoes = Revisao::with('pessoa', 'carro')->orderBy('id', 'asc')->paginate(5);
+        $filtro = $request->all();
+        if (!empty($filtro)) {
+            $revisoes = Revisao::whereBetween('data_revisao', [$filtro['ini'], $filtro['fim']])
+                ->with('pessoa', 'carro')
+                ->orderBy('id', 'desc')
+                ->paginate(5);
+        } else {
+            $revisoes = Revisao::with('pessoa', 'carro')->orderBy('id', 'asc')->paginate(5);
+        }
+        
         return view('revisao.index', compact('revisoes'));
     }
     public function create()
@@ -23,7 +32,7 @@ class RevisaoController extends Controller
     {
         Revisao::create($request->all());
 
-        return redirect()->route('pessoa.index')->with('success', 'Carro cadastrado com sucesso.');
+        return redirect()->route('revisao.index')->with('success', 'Revisão cadastrada com sucesso.');
  
     }
 

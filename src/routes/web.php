@@ -48,6 +48,7 @@ Route::delete('/carro/{carro}', [CarroController::class, 'destroy'])->name('carr
 
 //Rotas para gerenciamento de Revisão.
 Route::get('/revisao', [RevisaoController::class, 'index'])->name('revisao.index');
+Route::post('/revisao', [RevisaoController::class, 'index'])->name('revisao.index.filtro');
 Route::get('/revisao/create', [RevisaoController::class, 'create'])->name('revisao.create');
 Route::post('/revisao/store', [RevisaoController::class, 'store'])->name('revisao.store');
 Route::get('/revisao/edit/{id}', [RevisaoController::class, 'edit'])->name('revisao.edit');
@@ -58,3 +59,4 @@ Route::post('/revisao/logout/', [RevisaoController::class, 'logout'])->name('log
 //Rotas para utilização de Relatórios
 Route::get('/relatorio/pessoa', [RelatorioController::class, 'pessoas'])->name('relatorio.pessoa');
 Route::get('/relatorio/carro', [RelatorioController::class, 'carros'])->name('relatorio.carro');
+Route::get('/relatorio/revisao', [RelatorioController::class, 'revisoes'])->name('relatorio.revisao');
