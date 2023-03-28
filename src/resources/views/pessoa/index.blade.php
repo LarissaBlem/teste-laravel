@@ -27,7 +27,7 @@
                     <div class="">
                         <div class="mb-3">
                             <select class="form-select" aria-label="Default select example" name="genero">
-                                <option selected>Selecione</option>
+                                <option selected value="">Selecione</option>
                                 <option value="F">Feminino</option>
                                 <option value="M">Masculino</option>
                             </select>
@@ -36,6 +36,7 @@
                         <button type="submit" class="btn btn-primary">Limpar</button>
                     </div>
                 </form>
+                <br/>
                 <table class="table table-bordered ">
                     <tr>
                         <th class="col">Id</th>

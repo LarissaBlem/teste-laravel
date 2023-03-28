@@ -12,7 +12,8 @@ class PessoaController extends Controller
     {
         $filtro = $request->only('genero');
 
-        if (!empty($filtro)) {
+        //Verifica se existe um filtro de gênero setado e se o mesmo é um gênero válido. Senão mostra todas as pessoas cadastradas.
+        if (isset($filtro['genero']) && $filtro['genero'] !== null) {
             $pessoas = Pessoa::where('genero', $filtro['genero'])->with('carros')->orderBy('nome', 'asc')->get();
         } else {
             $pessoas = Pessoa::with('carros')->orderBy('nome', 'asc')->get();

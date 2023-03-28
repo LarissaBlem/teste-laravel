@@ -59,6 +59,7 @@ class RelatorioController extends Controller
 
     public function revisoes()
     {
+        //Carregas as marcas (em carros) que possuem revisões e ordena pela quantidade de revisões.
         $marcas = DB::select(
             DB::raw(
                 "SELECT COUNT(R.id) as total, marcas.nome  from marcas
@@ -69,6 +70,7 @@ class RelatorioController extends Controller
             )
         );
 
+        //Carrega as pessoas que possuem revisões, agrupando por pessoa, com o total de revisões e ordena pela quantidade.
         $pessoas  = DB::select(
             DB::raw(
                 "SELECT COUNT(C.id) as total, P.nome  from pessoas as P
@@ -91,15 +93,18 @@ class RelatorioController extends Controller
         $data_anterior = false;
         $report = [];
 
+        //Para cada pessoa, verifica se existem revisões.
         foreach ($pessoas as $pessoa) {
             $data_anterior = false;
             if (!empty($pessoa->revisoes)) {
+                //Se não houver revisões anteriores não existe média.
                 if ($pessoa->revisoes->count() <= 1) {
                     $report[$pessoa->id] = [
                         'nome' => $pessoa->nome,
                         'media' => "0",
-                        'proxima' => '-'
-                    ];    
+                        'proxima' => 'Sem informações para cálculo.'
+                    ];
+                //Se houverem mais revisões, extrai as revisoes da pessoa para um array.    
                 } else {
                     $datas = $pessoa->revisoes->pluck('data_revisao')->toArray();
                     $array_diff = [];
@@ -112,11 +117,13 @@ class RelatorioController extends Controller
 
                             $diff = $b->diff($a)->days;
                             $array_diff[] = $diff;
+                            $data_anterior = $data;
                         }
                     }
-
+                    //Calcula a média
                     $media = (number_format(array_sum($array_diff)/count($array_diff)));
                     
+                    //Padroniza pra relatório o nome da pessoa, a média de dias e a próxima data, baseada na média.
                     $report[$pessoa->id] = [
                         'nome' => $pessoa->nome,
                         'media' => $media,

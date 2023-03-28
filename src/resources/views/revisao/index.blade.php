@@ -39,7 +39,7 @@
                     <button type="submit" class="btn btn-primary">Limpar</button>
                 </div>
             </form>
-
+            <br/>
             <table class="table table-bordered">
                 <tr>
                     <th>Id</th>
